@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИИ-консультант школы — подбор курсов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="profile-panel" id="profilePanel">
+      <header class="profile-header">
+        <img src="assets/logo.png" alt="Логотип" class="logo" onerror="this.style.display='none'"/>
+        <div>
+          <h1>Профиль ребенка</h1>
+          <p class="subtitle">AI собирает данные в реальном времени</p>
+        </div>
+      </header>
+
+      <div class="funnel">
+        <div class="funnel-step" data-step="1">Контакт</div>
+        <div class="funnel-step" data-step="2">Потребности</div>
+        <div class="funnel-step" data-step="3">Профиль</div>
+        <div class="funnel-step" data-step="4">Подбор</div>
+        <div class="funnel-step" data-step="5">Подтверждение</div>
+        <div class="funnel-step" data-step="6">Контакты</div>
+        <div class="funnel-step" data-step="7">Готово</div>
+      </div>
+
+      <div class="profile-cards">
+        <div class="profile-card" id="card-main">
+          <div class="card-title">🧒 Основные данные</div>
+          <div class="field" data-field="name"><span class="label">Имя:</span><span class="value status">AI уточняет…</span></div>
+          <div class="field" data-field="age"><span class="label">Возраст:</span><span class="value status">Выясняется…</span></div>
+          <div class="field" data-field="grade"><span class="label">Класс:</span><span class="value status">Выясняется…</span></div>
+        </div>
+
+        <div class="profile-card" id="card-interests">
+          <div class="card-title">🎯 Интересы</div>
+          <div class="chips" id="interestsChips">
+            <span class="chip-empty">AI уточняет…</span>
+          </div>
+        </div>
+
+        <div class="profile-card" id="card-issues">
+          <div class="card-title">⚠️ Зоны развития</div>
+          <div class="chips" id="issuesChips">
+            <span class="chip-empty">Выясняется…</span>
+          </div>
+        </div>
+
+        <div class="profile-card" id="card-contacts">
+          <div class="card-title">👨‍👩‍👧 Контакты</div>
+          <div class="field" data-field="parent"><span class="label">Родитель:</span><span class="value status">Выясняется…</span></div>
+          <div class="field" data-field="phone"><span class="label">Телефон:</span><span class="value status">Выясняется…</span></div>
+          <div class="field" data-field="email"><span class="label">Email:</span><span class="value status">Выясняется…</span></div>
+        </div>
+
+        <div class="profile-card" id="card-courses" style="display:none">
+          <div class="card-title">🎓 Рекомендованные курсы</div>
+          <div class="courses-list" id="coursesList"></div>
+        </div>
+      </div>
+
+      <div class="final-block" id="finalBlock" style="display:none">
+        <p class="final-hint" id="analyticsStatus"></p>
+        <button class="btn-primary" id="btnFinish">✨ Сформировать PDF-отчет</button>
+        <button class="btn-secondary" id="btnDownload" style="display:none">⬇️ Скачать PDF</button>
+      </div>
+    </aside>
+
+    <main class="chat-panel">
+      <header class="chat-header">
+        <div class="ai-avatar">🌱</div>
+        <div>
+          <h2>Ассистент школы</h2>
+          <span class="online">● онлайн</span>
+        </div>
+      </header>
+
+      <div class="chat-window" id="chatWindow"></div>
+
+      <div class="quick-replies" id="quickReplies"></div>
+
+      <form class="chat-input" id="chatForm">
+        <input type="text" id="userInput" placeholder="Напишите сообщение…" autocomplete="off" />
+        <button type="submit" class="btn-send">➤</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="pdfSheet" class="pdf-sheet" aria-hidden="true" inert></div>
+
+  <script src="knowledge-base.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
